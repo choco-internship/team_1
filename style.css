@@ -1,0 +1,83 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* primary button style */
+
+.btn {
+  position: relative;
+  width: 100%;
+  max-width: 375px;
+  border-radius: 12px;
+  padding: 16px 0px;
+  margin-bottom: 24px;
+  border: none;
+}
+
+.btn_primary {
+  background: #2997ff;
+}
+
+.btn_disabled {
+  opacity: 0.5;
+}
+
+.btn__text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 19px;
+}
+
+.btn__text_absolute {
+  position: absolute;
+}
+
+.btn__text_price {
+  right: 16px;
+}
+
+.btn__text_amount {
+  left: 16px;
+}
+
+.btn__text_disabled {
+  opacity: 0.5;
+}
+
+/* add button style */
+
+.add-btn {
+  background: #ffffff;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 4px 13px;
+  border: none;
+}
+
+.add-btn__inner {
+  display: flex;
+  gap: 19px;
+  align-items: center;
+}
+
+.add-btn__number {
+  font-size: 16px;
+  color: #131113;
+  line-height: 20px;
+}
+
+.add-btn__sign {
+  font-weight: 500;
+  font-size: 22px;
+  color: #2997ff;
+  line-height: 26px;
+}

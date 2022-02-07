@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Меню</title>
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="top-bar top-bar--flat">
+        <img
+          class="top-bar__back-btn"
+          src="./images/left-arrow.svg"
+          alt="back_arrow_icon"
+        />
+        <h1 class="top-bar__title">Mamma mia</h1>
+      </div>
+    </header>
+    <main class="main">
+      <section class="menu-info">
+        <!-- slider -->
+        <div class="slider">
+          <div class="slider__item">
+            <img
+              class="slider__image"
+              src="./images/rest_mamamia.png"
+              alt="restaurant_image"
+            />
+          </div>
+          <span class="slider__info">1/24</span>
+        </div>
+        <!-- address -->
+        <div class="menu-info__address container">ул. Панфилова 109</div>
+        <!-- menu categories -->
+        <nav class="menu-info__nav container">
+          <button class="menu-info__categories-btn">
+            <img src="./images/burger_menu.svg" alt="menu_icon" />
+          </button>
+          <ul class="menu-info__categories-list">
+            <li class="menu-info__categorie menu-info__categorie--active">
+              Пицца
+            </li>
+            <li class="menu-info__categorie">Напитки</li>
+            <li class="menu-info__categorie">Салаты</li>
+            <li class="menu-info__categorie">Супы</li>
+          </ul>
+        </nav>
+      </section>
+    </main>
+  </body>
+</html>

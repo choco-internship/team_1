@@ -1,0 +1,372 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+v ul,
+ol,
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+html,
+body {
+  /*  */
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  height: 100%;
+  color: #131113;
+  font-family: "Roboto", sans-serif;
+}
+
+/* ===========RESTAURANTS-PAGE================================ */
+.restaurants {
+  padding: 20px 0;
+}
+.container {
+  min-width: 320px;
+  padding: 0 16px;
+}
+.restaurants__catalog {
+}
+.catalog {
+}
+.catalog__item {
+}
+.item-catalog {
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ececec;
+}
+.item-catalog:first-child {
+  padding: 0 0 16px 0;
+}
+.item-catalog__image {
+  margin: 0 16px 0 0;
+}
+.item-catalog__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.item-catalog__title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: calc(20 / 16 * 100%);
+}
+.item-catalog__title:not(:last-child) {
+  margin: 0 0 8px 0;
+}
+.item-catalog__street {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(16 / 14 * 100%);
+}
+
+/* ===========MENU-PAGE================================ */
+.menu {
+}
+.menu__catalog {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.menu__category {
+  padding: 12.5px 0 0 0;
+}
+.category__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  color: #8f8f8f;
+}
+.menu__list {
+}
+.list {
+}
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12.5px 0;
+  border-bottom: 1px solid #ececec;
+}
+.list__item:first-child {
+  padding: 16px 0 12.5px 0;
+}
+.item-list {
+}
+.item-list__content {
+  margin: 0 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 184px;
+  word-break: break-all;
+}
+.item-list__title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: calc(16 / 14 * 100%);
+  color: #303030;
+}
+.item-list__title:not(:last-child) {
+  margin: 0 0 8px 0;
+}
+.item-list__price {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(16 / 14 * 100%);
+  color: #2997ff;
+}
+.item-list__description {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: calc(16 / 12 * 100%);
+  color: #707070;
+  flex: 1 1 100%;
+}
+.item-list__description:not(:last-child) {
+  margin: 0 0 8px 0;
+}
+.item-list__image {
+  position: relative;
+}
+.item-list__button {
+  padding: 0 4px 0 0;
+}
+.item-list__button_positioned {
+  padding: 0;
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+
+.menu__cart-button {
+    position: absolute;
+    width: 100%;
+    bottom: -15px;
+    left: 0;
+}
+
+/* ===========CART-PAGE================================ */
+.wrapper {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.cart__container {
+    display: flex;
+    flex-direction: column;
+}
+.main {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+.cart__restaurant {
+    border-bottom: 8px solid #F8F8F8;
+}
+.restaurant {
+}
+.restaurant__content {
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.restaurant__title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    color: #131313;
+}
+.restaurant__title:not(:last-child) {
+    margin: 0 0 12px 0;
+}
+.restaurant__street {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(16 / 14 * 100%);
+}
+
+.cart__wrapper {
+    position: relative;
+    height: 100%;
+}
+.cart__order {
+}
+.order {
+}
+.order__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+    margin: 13px 0 9px 0;
+}
+.order__list {
+    display: flex;
+    flex-direction: column;
+}
+.order__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12.5px 0;
+    border-bottom: 1px solid #ECECEC;
+}
+.order__item:first-child {
+    padding-top: 7px;
+}
+.item-order {
+}
+.item-order__content {
+}
+.item-order__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(16 / 14 * 100%);
+    color: #303030;
+}
+.item-order__title:not(:last-child) {
+    margin: 0 0 8px 0;
+}
+.item-order__price {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: calc(16 / 14 * 100%);
+}
+.item-order__image {
+    position: relative;
+}
+.item-order__image img {
+    width: 99px;
+    height: 68px;
+}
+.item-order__button {
+}
+.item-order__button_positioned {
+    position: absolute;
+    bottom: -5px;
+}
+.order__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16.5px 0;
+}
+.total-order {
+}
+.total-order__title, .total-order__price {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    color: #131313;
+}
+.cart__button {
+    position: absolute;
+    width: 100%;
+    bottom:0;
+}
+.footer {
+    text-align: center;
+}
+
+/* ===========BUTTON-STYLES================================ */
+
+/* primary button style */
+.btn {
+  position: relative;
+  width: 100%;
+  max-width: 328px;
+  border-radius: 12px;
+  padding: 16px 0px;
+  margin-bottom: 24px;
+  border: none;
+}
+
+.btn_primary {
+  background: #2997ff;
+}
+
+.btn_disabled {
+  opacity: 0.5;
+}
+
+.btn__text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 19px;
+}
+
+.btn__text_absolute {
+  position: absolute;
+}
+
+.btn__text_price {
+  right: 16px;
+}
+
+.btn__text_amount {
+  left: 16px;
+}
+
+.btn__text_disabled {
+  opacity: 0.5;
+}
+
+/* add button style */
+.add-btn {
+  background: #ffffff;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 4px 13px;
+  border: none;
+}
+
+.add-btn__inner {
+  display: flex;
+  gap: 19px;
+  align-items: center;
+}
+
+.add-btn__number {
+  font-size: 16px;
+  color: #131113;
+  line-height: 20px;
+}
+
+.add-btn__sign {
+  font-weight: 500;
+  font-size: 22px;
+  color: #2997ff;
+  line-height: 26px;
+}

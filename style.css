@@ -51,42 +51,39 @@ body {
   min-width: 320px;
   padding: 0 16px;
 }
-.restaurants__catalog {
+.restaurant-container {
+    display: flex;
+    flex-direction: column;
 }
-.catalog {
+.restaurant {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #ECECEC;
 }
-.catalog__item {
+.restaurant__image {
+    margin: 0 16px 0 0;
 }
-.item-catalog {
-  padding: 16px 0;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #ececec;
+.restaurant__content {
+    display: flex;
+    flex-direction: column;
 }
-.item-catalog:first-child {
-  padding: 0 0 16px 0;
+.restaurant__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #131313;
 }
-.item-catalog__image {
-  margin: 0 16px 0 0;
+.restaurant__title:not(:last-child) {
+    margin: 0 0 8px 0;
 }
-.item-catalog__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.restaurant__address {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #131313;
 }
-.item-catalog__title {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: calc(20 / 16 * 100%);
-}
-.item-catalog__title:not(:last-child) {
-  margin: 0 0 8px 0;
-}
-.item-catalog__street {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: calc(16 / 14 * 100%);
-}
+
 
 /* ===========MENU-PAGE================================ */
 .menu {

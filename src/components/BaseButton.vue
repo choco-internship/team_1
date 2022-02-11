@@ -1,22 +1,12 @@
 <template>
   <button class="btn btn--primary" :disabled="disabled">
-    <span
-      v-if="amount"
-      :class="`btn__info btn__info--amount ${
-        contentDisabled ? 'btn__info--disabled' : ''
-      }`"
-    >
+    <span v-if="amount" :class="`btn__info btn__info--amount ${disabledClass}`">
       {{ amount }} шт.
     </span>
     <span class="btn__text">
       <slot></slot>
     </span>
-    <span
-      v-if="price"
-      :class="`btn__info btn__info--price ${
-        contentDisabled ? 'btn__info--disabled' : ''
-      }`"
-    >
+    <span v-if="price" :class="`btn__info btn__info--price ${disabledClass}`">
       {{ price }} ₸
     </span>
   </button>
@@ -37,12 +27,17 @@ export default {
     },
     price: {
       type: [String, Number],
-      required: false,
+      default: 0,
     },
     contentDisabled: {
       type: Boolean,
       required: false,
       default: false,
+    },
+  },
+  computed: {
+    disabledClass() {
+      return this.contentDisabled ? "btn__info--disabled" : "";
     },
   },
 };
@@ -60,9 +55,6 @@ export default {
   font-weight: bold;
   color: #ffffff;
   line-height: 19px;
-  user-select: none;
-  border: none;
-  cursor: pointer;
 }
 
 .btn--primary {

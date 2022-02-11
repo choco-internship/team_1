@@ -16,21 +16,6 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-html,
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-#app {
-  font-family: "Roboto", sans-serif;
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-}
-
 .main {
   flex: 1;
 }

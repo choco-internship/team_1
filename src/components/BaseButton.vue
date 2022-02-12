@@ -50,7 +50,6 @@ export default {
   max-width: 375px;
   border-radius: 12px;
   padding: 16px 0px;
-  margin-bottom: 24px;
   font-size: 14px;
   font-weight: bold;
   color: #ffffff;

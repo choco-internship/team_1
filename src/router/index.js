@@ -20,7 +20,12 @@ const routes = [
     path: "/:pathMatch(.*)",
     component: () => import("@/views/404.vue"),
   },
+  {
+    path: "/registration",
+    component: () => import("@/views/Registration.vue"),
+  },
 ];
+
 const router = createRouter({
   history: createWebHistory(),
   routes,

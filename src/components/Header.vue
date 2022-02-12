@@ -8,7 +8,7 @@
       >
         <img src="@/assets/images/arrow_back.svg" alt="" />
       </button>
-      <h1 class="top-bar__title">
+      <h1 class="title">
         <slot></slot>
       </h1>
     </div>
@@ -32,17 +32,8 @@ export default {
   background-color: #fff;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
 }
-
 .top-bar--flat {
   box-shadow: none;
-}
-
-.top-bar__title {
-  font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 20px;
-  color: #131113;
 }
 
 .top-bar__back-btn {

@@ -29,10 +29,9 @@
 </template>
 
 <script>
-import PageTitle from "@/components/PageTitle.vue";
 import BaseButton from "@/components/BaseButton.vue";
 export default {
-  components: { PageTitle, BaseButton },
+  components: { BaseButton },
 };
 </script>
 

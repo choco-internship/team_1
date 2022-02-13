@@ -26,6 +26,14 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100vw;
+  z-index: 1;
+}
 .top-bar {
   display: flex;
   padding: 20px 16px;

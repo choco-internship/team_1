@@ -19,10 +19,37 @@ const routes = [
   {
     path: "/:pathMatch(.*)",
     component: () => import("@/views/404.vue"),
+    meta: {
+      layout: "HiddenLayout",
+    },
   },
   {
     path: "/registration",
     component: () => import("@/views/Registration.vue"),
+    meta: {
+      layout: "HiddenLayout",
+    },
+  },
+  {
+    path: "/restaurant/:id",
+    component: () => import("@/components/RestaurantPage.vue"),
+    meta: {
+      layout: "HiddenLayout",
+    },
+  },
+  {
+    path: "/menu/:id",
+    component: () => import("@/components/CategoriesListPage.vue"),
+    meta: {
+      layout: "HiddenLayout",
+    },
+  },
+  {
+    path: "/cart",
+    component: () => import("@/components/Cart.vue"),
+    meta: {
+      layout: "HiddenLayout",
+    },
   },
 ];
 

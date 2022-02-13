@@ -10,18 +10,26 @@
           {{ formGroup[formPosition].subtitle }}
         </p>
         <div class="form__controll">
-          <div class="form__input-wrapper">
-            <label class="form__label" :for="formGroup[formPosition].type">
-              {{ formGroup[formPosition].label }}
-            </label>
-            <input
-              class="form__input"
-              :id="formGroup[formPosition].type"
-              :type="formGroup[formPosition].type"
-              :placeholder="formGroup[formPosition].placeholder"
-              v-model="formGroup[formPosition].value"
-            />
-          </div>
+          <AuthInput
+            v-if="formGroup[formPosition].type === 'email'"
+            id="email"
+            type="email"
+            label="e-mail"
+            placeholder="Введите почтовый адрес"
+            v-model:value="formGroup[formPosition].value"
+            error="Введите корректный почтовый адрес"
+            :isError="formGroup[formPosition].error"
+          />
+          <AuthInput
+            v-else
+            id="password"
+            type="password"
+            label="Пароль"
+            placeholder="Введите пароль"
+            v-model:value="formGroup[formPosition].value"
+            error="Пароль не соответствует требованиям"
+            :isError="formGroup[formPosition].error"
+          />
         </div>
         <p class="form__condition">
           Нажимая “Далее”, вы принимаете <br />
@@ -31,9 +39,9 @@
       <div class="form__controll">
         <BaseButton
           @click.prevent="nextStep(formGroup[formPosition].type)"
-          :disabled="formGroup[formPosition].value ? false : true"
+          :disabled="isDisabled"
         >
-          Далее
+          {{ onSubmitText }}
         </BaseButton>
       </div>
     </form>
@@ -43,31 +51,41 @@
 <script>
 import Header from "@/components/Header.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import AuthInput from "@/components/AuthInput.vue";
 
 export default {
-  components: { Header, BaseButton },
+  components: { Header, BaseButton, AuthInput },
   data() {
     return {
       formPosition: 0,
       formGroup: [
         {
-          type: "email",
           title: "Регистрация",
           subtitle: "Введите ваш почтовый адрес",
-          label: "e-mail",
-          placeholder: "Введите ваш почтовый адрес",
+          type: "email",
+          error: false,
           value: "",
         },
         {
-          type: "password",
           title: "Введите пароль",
           subtitle: "Пароль должен состоять минимум из 9 символов",
-          label: "Пароль",
-          placeholder: "Введите пароль",
+          type: "password",
+          error: false,
           value: "",
         },
       ],
     };
+  },
+  computed: {
+    isDisabled() {
+      return this.formGroup[this.formPosition].value ? false : true;
+    },
+    isLastStep() {
+      return this.formPosition === this.formGroup.length - 1;
+    },
+    onSubmitText() {
+      return this.isLastStep ? "Зарегистрироваться" : "Далее";
+    },
   },
   methods: {
     nextStep(type) {
@@ -76,33 +94,29 @@ export default {
 
       switch (type) {
         case "email":
-          if (!email) {
-            alert("Email required");
-          } else if (!this.validEmail(email)) {
-            alert("Valid email required.");
+          if (!this.validEmail(email)) {
+            this.formGroup[this.formPosition].error = true;
             return;
           }
           break;
         case "password":
-          if (!password) {
-            alert("Password required");
-          } else if (!this.validPassword(password)) {
-            alert(
-              "Valid password required. Minimum eight characters, at least one letter and one number."
-            );
+          if (!this.validPassword(password)) {
+            this.formGroup[this.formPosition].error = true;
             return;
           }
           break;
-        default:
-          break;
       }
 
-      if (this.formPosition === this.formGroup.length - 1) {
+      if (this.formGroup[this.formPosition].error) {
+        this.formGroup[this.formPosition].error = false;
+      }
+
+      if (this.isLastStep) {
         alert("success");
         return;
       }
 
-      this.formPosition = this.formPosition + 1;
+      this.formPosition += 1;
     },
     validEmail(email) {
       const re =
@@ -149,34 +163,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.form__input-wrapper {
-  max-width: 375px;
-  width: 100%;
-}
-
-.form__label {
-  font-size: 12px;
-  line-height: 16px;
-  color: #131113;
-  margin-bottom: 4px;
-}
-
-.form__input {
-  max-width: 375px;
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #8f8f8f;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 20px;
-  color: #131113;
-  outline: none;
-}
-
-.form__input:focus {
-  border-color: #2997ff;
 }
 
 .form__condition {

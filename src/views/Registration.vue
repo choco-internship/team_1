@@ -112,7 +112,7 @@ export default {
       }
 
       if (this.isLastStep) {
-        alert("success");
+        this.$router.push("/");
         return;
       }
 

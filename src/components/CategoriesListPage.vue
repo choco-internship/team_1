@@ -1,52 +1,26 @@
 <template>
   <Header :isBackIcon="true">Меню</Header>
   <section class="categories">
-    <ul class="categories-list">
+    <ul
+      class="categories-list"
+      v-for="categorie in $options.$categories"
+      :key="categorie.id"
+    >
       <li class="categories-list__item">
-        <span class="categories-list__name">Пицца</span>
-        <span class="categories-list__amount">20</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Напитки</span>
-        <span class="categories-list__amount">11</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Салаты</span>
-        <span class="categories-list__amount">12</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Супы</span>
-        <span class="categories-list__amount">12</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Паста</span>
-        <span class="categories-list__amount">12</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Горячее</span>
-        <span class="categories-list__amount">12</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Кофе</span>
-        <span class="categories-list__amount">12</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Чай</span>
-        <span class="categories-list__amount">12</span>
-      </li>
-      <li class="categories-list__item">
-        <span class="categories-list__name">Десерты</span>
-        <span class="categories-list__amount">12</span>
+        <span class="categories-list__name">{{ categorie.name }}</span>
+        <span class="categories-list__amount">{{ categorie.amount }}</span>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
+import categories from "@/data/categories.json";
 import Header from "./Header.vue";
 export default {
   name: "CategoriesListPage",
   components: { Header },
+  $categories: categories,
 };
 </script>
 

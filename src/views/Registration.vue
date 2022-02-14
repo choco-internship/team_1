@@ -1,6 +1,6 @@
 <template>
   <Header :isBackIcon="true" :isFlat="true"></Header>
-  <div class="registration container">
+  <section class="registration container">
     <form class="form">
       <div class="form__wrapper">
         <h1 class="title title--center">
@@ -45,7 +45,7 @@
         </BaseButton>
       </div>
     </form>
-  </div>
+  </section>
 </template>
 
 <script>

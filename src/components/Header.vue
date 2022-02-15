@@ -33,6 +33,7 @@ export default {
   width: 100%;
   max-width: 100vw;
   z-index: 1;
+  height: 56px;
 }
 .top-bar {
   display: flex;

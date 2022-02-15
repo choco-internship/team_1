@@ -62,7 +62,7 @@ export default {
 .order-item {
   position: relative;
   padding: 16px;
-  background: #ffffff;
+  background-color: #ffffff;
   margin-bottom: 13px;
   cursor: pointer;
 }

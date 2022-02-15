@@ -49,12 +49,12 @@ export default {
 
 <style>
 .detail {
-  background: rgba(248, 248, 248, 255);
+  background-color: rgba(248, 248, 248, 255);
   height: 100vh;
 }
 
 .detail__card {
-  background: #fff;
+  background-color: #fff;
   padding-top: 20px;
   padding-bottom: 16px;
   margin-bottom: 8px;
@@ -77,7 +77,7 @@ export default {
 .detail__divider {
   height: 1px;
   width: 100%;
-  background: #ececec;
+  background-color: #ececec;
   margin: 12px 0px;
 }
 

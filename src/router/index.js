@@ -24,6 +24,10 @@ const routes = [
     path: "/registration",
     component: () => import("@/views/Registration.vue"),
   },
+  {
+    path: "/order-detail/:id",
+    component: () => import("@/views/MyOrderDetail.vue"),
+  },
 ];
 
 const router = createRouter({

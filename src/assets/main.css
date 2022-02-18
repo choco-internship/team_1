@@ -36,7 +36,6 @@ button {
   line-height: 20px;
   color: #131113;
 }
-
 .restaurant-info {
   display: flex;
   flex-direction: column;
@@ -62,3 +61,6 @@ button {
   z-index: 1;
   margin-bottom: 24px;
 }
+
+.main-bg-color {
+  background-color: rgba(248, 248, 248, 255);

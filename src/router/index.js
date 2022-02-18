@@ -51,6 +51,10 @@ const routes = [
       layout: "HiddenLayout",
     },
   },
+  {
+    path: "/order-detail/:id",
+    component: () => import("@/views/MyOrderDetail.vue"),
+  },
 ];
 
 const router = createRouter({

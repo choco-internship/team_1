@@ -1,22 +1,22 @@
 <template>
-  <main class="main">
-    <router-view></router-view>
-  </main>
-  <footer class="footer">
-    <Navbar />
-  </footer>
+  <component :is="layout">
+    <router-view />
+  </component>
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
+import DefaultLayout from "./layouts/DefaultLayout.vue";
+import HiddenLayout from "./layouts/HiddenLayout.vue";
+
 export default {
   name: "App",
-  components: { Navbar },
+  computed: {
+    layout() {
+      return this.$route.meta.layout || "DefaultLayout";
+    },
+  },
+  components: { DefaultLayout, HiddenLayout },
 };
 </script>
 
-<style>
-.main {
-  flex: 1;
-}
-</style>
+<style scoped></style>

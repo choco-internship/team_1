@@ -1,0 +1,267 @@
+[
+  {
+    "id": 0,
+    "rest_name": "Del Papa",
+    "rest_address": "ул. Бухар жырау, 66, уг. ул. Ауэзова",
+    "rest_menu": [
+      {
+        "menu_categorie": "Пицца",
+        "menu_list": [
+          {
+            "name": "Пицца Маргарита",
+            "description": "",
+            "price": 1600,
+            "img_path": "pizza0"
+          },
+          {
+            "name": "Пицца Пепперони",
+            "description": "Любая маленькая пицца на выбор, порция фри и Coca Cola",
+            "price": 1600,
+            "img_path": "pizza1"
+          },
+          {
+            "name": "Пицца Кальцоне",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza2"
+          },
+          {
+            "name": "Пицца Мексикано",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza3"
+          }
+        ]
+      },
+      {
+        "menu_categorie": "Напитки",
+        "menu_list": [
+          {
+            "name": "Фреш Яблочный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          },
+          {
+            "name": "Фреш Морковный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "rest_name": "Ресторан «Свет»",
+    "rest_address": "ул. Кабанбай батыра 83",
+    "rest_menu": [
+      {
+        "menu_categorie": "Пицца",
+        "menu_list": [
+          {
+            "name": "Пицца Маргарита",
+            "description": "",
+            "price": 1600,
+            "img_path": "pizza0"
+          },
+          {
+            "name": "Пицца Пепперони",
+            "description": "Любая маленькая пицца на выбор, порция фри и Coca Cola",
+            "price": 1600,
+            "img_path": "pizza1"
+          },
+          {
+            "name": "Пицца Кальцоне",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza2"
+          },
+          {
+            "name": "Пицца Мексикано",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza3"
+          }
+        ]
+      },
+      {
+        "menu_categorie": "Напитки",
+        "menu_list": [
+          {
+            "name": "Фреш Яблочный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          },
+          {
+            "name": "Фреш Морковный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "rest_name": "Mamma mia",
+    "rest_address": "ул. Панфилова 109",
+    "rest_menu": [
+      {
+        "menu_categorie": "Пицца",
+        "menu_list": [
+          {
+            "name": "Пицца Маргарита",
+            "description": "",
+            "price": 1600,
+            "img_path": "pizza0"
+          },
+          {
+            "name": "Пицца Пепперони",
+            "description": "Любая маленькая пицца на выбор, порция фри и Coca Cola",
+            "price": 1600,
+            "img_path": "pizza1"
+          },
+          {
+            "name": "Пицца Кальцоне",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza2"
+          },
+          {
+            "name": "Пицца Мексикано",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza3"
+          }
+        ]
+      },
+      {
+        "menu_categorie": "Напитки",
+        "menu_list": [
+          {
+            "name": "Фреш Яблочный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          },
+          {
+            "name": "Фреш Морковный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "rest_name": "Bahandi Burger",
+    "rest_address": "ул. Байтурсынова 61",
+    "rest_menu": [
+      {
+        "menu_categorie": "Пицца",
+        "menu_list": [
+          {
+            "name": "Пицца Маргарита",
+            "description": "",
+            "price": 1600,
+            "img_path": "pizza0"
+          },
+          {
+            "name": "Пицца Пепперони",
+            "description": "Любая маленькая пицца на выбор, порция фри и Coca Cola",
+            "price": 1600,
+            "img_path": "pizza1"
+          },
+          {
+            "name": "Пицца Кальцоне",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza2"
+          },
+          {
+            "name": "Пицца Мексикано",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza3"
+          }
+        ]
+      },
+      {
+        "menu_categorie": "Напитки",
+        "menu_list": [
+          {
+            "name": "Фреш Яблочный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          },
+          {
+            "name": "Фреш Морковный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "rest_name": "KFC",
+    "rest_address": "Байзакова 280, БЦ Smart Point  ",
+    "rest_menu": [
+      {
+        "menu_categorie": "Пицца",
+        "menu_list": [
+          {
+            "name": "Пицца Маргарита",
+            "description": "",
+            "price": 1600,
+            "img_path": "pizza0"
+          },
+          {
+            "name": "Пицца Пепперони",
+            "description": "Любая маленькая пицца на выбор, порция фри и Coca Cola",
+            "price": 1600,
+            "img_path": "pizza1"
+          },
+          {
+            "name": "Пицца Кальцоне",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza2"
+          },
+          {
+            "name": "Пицца Мексикано",
+            "description": "Одна строка описания чего-то",
+            "price": 1600,
+            "img_path": "pizza3"
+          }
+        ]
+      },
+      {
+        "menu_categorie": "Напитки",
+        "menu_list": [
+          {
+            "name": "Фреш Яблочный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          },
+          {
+            "name": "Фреш Морковный, 500 мл",
+            "description": "",
+            "price": 1950,
+            "img_path": ""
+          }
+        ]
+      }
+    ]
+  }
+]

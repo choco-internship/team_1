@@ -119,6 +119,12 @@ export default {
   box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-evenly;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 100vw;
+  z-index: 1;
+  height: 56px;
 }
 
 .navbar__link {

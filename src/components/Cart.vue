@@ -29,7 +29,7 @@
 
 <script>
 import Header from "./Header.vue";
-import MenuItem from "./MenuItem.vue";
+import MenuItem from "../views/Restaurant/MenuItem.vue";
 import BaseButton from "./BaseButton.vue";
 export default {
   components: { Header, MenuItem, BaseButton },

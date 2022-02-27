@@ -5,7 +5,7 @@
       <div class="product__price">{{ price }}</div>
     </div>
     <div v-if="img_path" class="product__image">
-      <img :src="require(`@/assets/images/menu/${img_path}.png`)" :alt="name" />
+      <img :src="img_path" :alt="name" />
       <div class="product__controll">
         <button v-if="amount > 0" class="product__btn" @click="amount -= 1">
           &minus;

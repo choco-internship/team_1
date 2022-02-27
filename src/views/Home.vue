@@ -1,39 +1,52 @@
 <template>
   <Header>Заказ с собой</Header>
-  <section class="restaurants">
+  <section v-if="restaurants" class="restaurants">
     <div class="container">
       <div class="restaurants__list">
-        <router-link
-          class="restaurant__item"
-          v-for="restaurant in $options.$restaurants_list"
-          :key="restaurant.id"
-          :to="`/restaurant/${restaurant.id}`"
+        <div
+          class="restaurants__item"
+          v-for="{ restaurant, id } in restaurants"
+          :key="id"
         >
-          <img
-            class="restaurant__image"
-            :src="require(`@/assets/images/restaurants/${restaurant.id}.png`)"
-            :alt="restaurant.rest_name"
-          />
+          <router-link
+            class="restaurant__link"
+            :to="`/restaurant/${restaurant.restaurant_data.id}`"
+          >
+            <img
+              class="restaurant__image"
+              :src="restaurant.image.image_url"
+              :alt="restaurant.restaurant_data.name"
+            />
 
-          <div class="restaurant-info">
-            <h3 class="restaurant-info__title">{{ restaurant.rest_name }}</h3>
-            <p class="restaurant-info__address">
-              {{ restaurant.rest_address }}
-            </p>
-          </div>
-        </router-link>
+            <div class="restaurant-info">
+              <h3 class="restaurant-info__title">
+                {{ restaurant.restaurant_data.name }}
+              </h3>
+              <p class="restaurant-info__address">
+                {{ restaurant.restaurant_data.location }}
+              </p>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import restaurants from "../data/restaurants.json";
 import Header from "../components/Header.vue";
+
 export default {
   name: "Home",
   components: { Header },
-  $restaurants_list: restaurants,
+  created() {
+    this.$store.dispatch("FETCH_RESTAURANTS");
+  },
+  computed: {
+    restaurants() {
+      return this.$store.state.restaurants;
+    },
+  },
 };
 </script>
 
@@ -41,7 +54,7 @@ export default {
 .restaurant__image {
   margin-right: 16px;
 }
-.restaurant__item {
+.restaurant__link {
   display: flex;
   text-decoration: none;
   align-items: center;

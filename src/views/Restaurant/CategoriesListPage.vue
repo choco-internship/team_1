@@ -3,24 +3,37 @@
   <section class="categories">
     <ul
       class="categories-list"
-      v-for="categorie in $options.$categories"
-      :key="categorie.id"
+      v-for="(categorie, i) in restaurant.product_categories"
+      :key="i"
     >
       <li class="categories-list__item">
-        <span class="categories-list__name">{{ categorie.name }}</span>
-        <span class="categories-list__amount">{{ categorie.amount }}</span>
+        <span class="categories-list__name">{{
+          categorie.product_category_name
+        }}</span>
+        <span class="categories-list__amount">{{
+          categorie.products.length
+        }}</span>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
-import categories from "@/data/categories.json";
-import Header from "./Header.vue";
+import Header from "../../components/Header.vue";
 export default {
   name: "CategoriesListPage",
   components: { Header },
-  $categories: categories,
+  computed: {
+    getId() {
+      return this.$route.params.id;
+    },
+    restaurant() {
+      return this.$store.state.restaurant;
+    },
+  },
+  created() {
+    this.$store.dispatch("FETCH_RESTAURANT", this.getId);
+  },
 };
 </script>
 

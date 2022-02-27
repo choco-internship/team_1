@@ -1,49 +1,82 @@
 <template>
   <Header :isBackIcon="true" :isFlat="true">
-    {{ restaurant.rest_name }}
+    {{ restaurant.restaurant_name }}
   </Header>
   <section class="menu-info">
     <!-- slider -->
     <Slider />
     <!-- address -->
     <div class="menu-info__address container">
-      {{ restaurant.rest_address }}
+      {{ restaurant.location }}
     </div>
     <!-- menu categories -->
     <nav class="menu-info__nav container">
-      <router-link class="menu-info__categories-btn" :to="`/menu/:${id}`">
-        <img src="@/assets/images/burger_menu.svg" alt="" />
+      <router-link class="menu-info__categories-btn" :to="`/menu/${getId}`">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3.75 12H20.25"
+            stroke="#3C3C43"
+            stroke-opacity="0.6"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3.75 6H20.25"
+            stroke="#3C3C43"
+            stroke-opacity="0.6"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3.75 18H20.25"
+            stroke="#3C3C43"
+            stroke-opacity="0.6"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </router-link>
       <ul class="categories-list">
-        <li class="categories-list__item categories-list__item--active">
-          Пицца
+        <li
+          class="categories-list__item categories-list__item--active"
+          v-for="(categorie, id) in restaurant.product_categories"
+          :key="id"
+        >
+          {{ categorie.product_category_name }}
         </li>
-        <li class="categories-list__item">Напитки</li>
-        <li class="categories-list__item">Салаты</li>
-        <li class="categories-list__item">Супы</li>
       </ul>
     </nav>
   </section>
   <section class="menu container">
     <div
       class="menu-category"
-      v-for="(menu, i) in restaurant.rest_menu"
+      v-for="(menu, i) in restaurant.product_categories"
       :key="i"
     >
-      <div class="menu-category__title">{{ menu.menu_categorie }}</div>
+      <div class="menu-category__title">{{ menu.product_category_name }}</div>
       <div class="menu-category__list">
         <MenuItem
-          v-for="(menu_item, index) in menu.menu_list"
-          :name="menu_item.name"
-          :description="menu_item.description"
-          :price="menu_item.price"
-          :img_path="menu_item.img_path"
-          :key="index"
+          v-for="(product, i) in menu.products"
+          :product_id="product.product_id"
+          :name="product.product_name"
+          :description="product.description"
+          :price="product.price"
+          :img_path="product.image"
+          :key="i"
         />
       </div>
     </div>
   </section>
-  <router-link class="fixed-button container" to="/cart">
+  <router-link v-if="order.length" class="fixed-button container" to="/cart">
     <BaseButton :amount="1" :price="1600" :contentDisabled="true"
       >Корзина</BaseButton
     >
@@ -51,32 +84,28 @@
 </template>
 
 <script>
-import restaurants from "@/data/restaurants.json";
-import Header from "./Header.vue";
-import Slider from "./Slider.vue";
+import Header from "../../components/Header.vue";
+import Slider from "../../components/Slider.vue";
 import MenuItem from "./MenuItem.vue";
-import BaseButton from "./BaseButton.vue";
+import BaseButton from "../../components/BaseButton.vue";
 export default {
   name: "RestaurantPage",
   components: { Header, Slider, MenuItem, BaseButton },
   data() {
     return {
-      restaurant: {},
       order: [],
     };
   },
   computed: {
-    currentRouteName() {
+    getId() {
       return this.$route.params.id;
     },
-  },
-  methods: {
-    getRestaurantById() {
-      return restaurants.filter((rest) => rest.id == this.currentRouteName)[0];
+    restaurant() {
+      return this.$store.state.restaurant;
     },
   },
-  beforeMount() {
-    this.restaurant = this.getRestaurantById();
+  created() {
+    this.$store.dispatch("FETCH_RESTAURANT", this.getId);
   },
 };
 </script>

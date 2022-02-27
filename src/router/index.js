@@ -32,14 +32,14 @@ const routes = [
   },
   {
     path: "/restaurant/:id",
-    component: () => import("@/components/RestaurantPage.vue"),
+    component: () => import("@/views/Restaurant/RestaurantPage.vue"),
     meta: {
       layout: "HiddenLayout",
     },
   },
   {
     path: "/menu/:id",
-    component: () => import("@/components/CategoriesListPage.vue"),
+    component: () => import("@/views/Restaurant/CategoriesListPage.vue"),
     meta: {
       layout: "HiddenLayout",
     },

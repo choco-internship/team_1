@@ -50,7 +50,7 @@ export default {
 <style>
 .detail {
   background-color: rgba(248, 248, 248, 255);
-  height: 100vh;
+  flex: 1;
 }
 
 .detail__card {

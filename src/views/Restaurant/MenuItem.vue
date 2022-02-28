@@ -66,6 +66,13 @@ export default {
 .product__image {
   position: relative;
 }
+
+.product__image img {
+  width: 128px;
+  height: 90px;
+  object-fit: cover;
+}
+
 .product__controll {
   display: flex;
   justify-content: space-evenly;

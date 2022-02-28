@@ -14,9 +14,3 @@ export default {
   components: { Navbar },
 };
 </script>
-
-<style scoped>
-.main {
-  padding-bottom: 56px;
-}
-</style>

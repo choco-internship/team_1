@@ -54,6 +54,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import AuthInput from "@/components/AuthInput.vue";
 
 export default {
+  name: "Registration",
   components: { Header, BaseButton, AuthInput },
   data() {
     return {
@@ -112,6 +113,7 @@ export default {
       }
 
       if (this.isLastStep) {
+        console.log(email, password);
         this.$router.push("/");
         return;
       }
@@ -136,10 +138,13 @@ export default {
   position: relative;
   padding-top: 28px;
   padding-bottom: 23px;
-  height: calc(100vh - 68px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .form {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

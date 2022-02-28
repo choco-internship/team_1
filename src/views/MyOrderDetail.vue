@@ -43,6 +43,7 @@
 import Header from "@/components/Header.vue";
 
 export default {
+  name: "MyOrdersDetail",
   components: { Header },
 };
 </script>

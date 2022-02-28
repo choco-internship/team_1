@@ -182,6 +182,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import Header from "@/components/Header.vue";
 
 export default {
+  name: "MyOrders",
   components: { Header, BaseButton },
 };
 </script>

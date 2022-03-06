@@ -1,14 +1,16 @@
 <template>
   <Header>Мои заказы</Header>
   <section class="order main-bg-color">
-    <div v-if="true" class="order__list">
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
+    <div v-if="isAuthenticated" class="order__list">
+      <div class="order__link" @click="navigateToDetail(orders.order_id)">
         <div class="order-item container">
           <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
+            <h3 class="order-item__title">{{ orders?.restaurant.name }}</h3>
+            <p class="order-item__date">
+              {{ convertToDate(orders?.restaurant.created_at) }}
+            </p>
           </div>
-          <p class="order-item__price">6 090 тг</p>
+          <p class="order-item__price">{{ orders.total }} тг</p>
           <p class="order-item__status">
             Статус -
             <span class="order-item__status-text order-item__status-text--start"
@@ -21,147 +23,7 @@
             alt=""
           />
         </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
-      <router-link class="order__link" :to="`/order-detail/${1827402}`">
-        <div class="order-item container">
-          <div class="order-item__header">
-            <h3 class="order-item__title">Mamma mia</h3>
-            <p class="order-item__date">15.12.2021, 10:44</p>
-          </div>
-          <p class="order-item__price">6 090 тг</p>
-          <p class="order-item__status">
-            Статус -
-            <span class="order-item__status-text order-item__status-text--start"
-              >В обработке
-            </span>
-          </p>
-          <img
-            class="order-item__btn"
-            src="@/assets/images/chevron_right.svg"
-            alt=""
-          />
-        </div>
-      </router-link>
+      </div>
     </div>
     <div v-else class="order__hidden container">
       <div class="order__hidden-inner">
@@ -170,7 +32,7 @@
           Необходимо войти в свой аккаунт, чтобы увидеть историю заказов
         </p>
         <div class="order__hidden-wrapper">
-          <BaseButton @click="$router.push('/registration')">Войти </BaseButton>
+          <BaseButton @click="$router.push('/login')">Войти </BaseButton>
         </div>
       </div>
     </div>
@@ -184,6 +46,34 @@ import Header from "@/components/Header.vue";
 export default {
   name: "MyOrders",
   components: { Header, BaseButton },
+  computed: {
+    isAuthenticated() {
+      return (
+        localStorage.getItem("access_token") &&
+        this.$store.getters.GET_IS_AUTHENTICATED
+      );
+    },
+    orders() {
+      return this.$store.getters.GET_ORDERS;
+    },
+  },
+  created() {
+    if (this.isAuthenticated) {
+      this.fetchOrders();
+    }
+  },
+  methods: {
+    fetchOrders() {
+      const userId = "1";
+      this.$store.dispatch("FETCH_ORDERS", userId);
+    },
+    convertToDate(str) {
+      return str.replace("T", ", ").substring(0, 17);
+    },
+    navigateToDetail(id) {
+      this.$router.push(`/order-detail/${id}`);
+    },
+  },
 };
 </script>
 

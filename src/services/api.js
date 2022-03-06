@@ -1,11 +1,23 @@
 import axios from "axios";
-import restaurants from "../model/restaurants.model.js";
-import orders from "../model/orders.model.js";
-import auth from "../model/auth.model.js";
+import restaurants from "@/model/restaurants.model.js";
+import orders from "@/model/orders.model.js";
+import auth from "@/model/auth.model.js";
 
 const api = axios.create({
-  baseURL: "http://142.93.107.238/api",
+  baseURL: "https://intern.rahmetapp.kz/api",
 });
+
+api.interceptors.request.use(
+  function (config) {
+    if (localStorage.getItem("access_token")) {
+      config.headers.Authorization = localStorage.getItem("access_token");
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 export default {
   restaurants: restaurants(api),

@@ -6,6 +6,7 @@ export default createStore({
     return {
       restaurants: [],
       restaurant: {},
+      cart: [],
     };
   },
   mutations: {
@@ -14,6 +15,32 @@ export default createStore({
     },
     SET_RESTAURANT(state, payload) {
       state.restaurant = payload;
+    },
+    ADD_TO_CART(state, product) {
+      let cartItem = state.cart.find((p) => {
+        return (
+          p.product_id == product.product_id &&
+          p.restaurant_id == product.restaurant_id
+        );
+      });
+      if (cartItem) {
+        cartItem.amount += 1;
+        return;
+      }
+      state.cart.push({ ...product, amount: 1 });
+    },
+    REMOVE_FROM_CART(state, product) {
+      let cartItem = state.cart.find((p) => {
+        return (
+          p.product_id == product.product_id &&
+          p.restaurant_id == product.restaurant_id
+        );
+      });
+      if (cartItem && cartItem.amount > 1) {
+        cartItem.amount -= 1;
+        return;
+      }
+      state.cart = state.cart.filter((item) => item != cartItem);
     },
   },
   actions: {
@@ -33,9 +60,24 @@ export default createStore({
         console.log("ERROR", error);
       }
     },
+    addProductToCart({ commit }, product) {
+      commit("ADD_TO_CART", product);
+    },
+    removeProductFromCart({ commit }, product) {
+      commit("REMOVE_FROM_CART", product);
+    },
   },
   getters: {
     GET_RESTAURANTS: (state) => state.restaurants,
     GET_RESTAURANT: (state) => state.restaurant,
+    GET_CART: (state) => state.cart,
+    GET_TOTAL_PRICE: (state) =>
+      state.cart.reduce(function (prev, cur) {
+        return prev + cur.price;
+      }, 0),
+    GET_TOTAL_AMOUNT: (state) =>
+      state.cart.reduce(function (prev, cur) {
+        return prev + cur.amount;
+      }, 0),
   },
 });

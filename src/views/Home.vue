@@ -53,6 +53,8 @@ export default {
 <style scoped>
 .restaurant__image {
   margin-right: 16px;
+  max-width: 90px;
+  max-height: 90px;
 }
 .restaurant__link {
   display: flex;

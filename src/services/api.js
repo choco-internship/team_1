@@ -4,7 +4,7 @@ import orders from "../model/orders.model.js";
 import auth from "../model/auth.model.js";
 
 const api = axios.create({
-  baseURL: "http://142.93.107.238/api",
+  baseURL: "https://intern.rahmetapp.kz/api",
 });
 
 export default {

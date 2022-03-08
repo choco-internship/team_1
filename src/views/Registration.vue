@@ -33,7 +33,7 @@ export default {
 
       try {
         await api.auth.registerUser(body);
-        this.$store.commit("SET_IS_LOADING(", false);
+        this.$store.commit("SET_IS_LOADING", false);
         this.isError = false;
         this.$store.commit("SET_IS_MODAL_OPEN", true);
       } catch (error) {
@@ -41,7 +41,7 @@ export default {
         this.$store.commit("SET_IS_MODAL_OPEN", true);
         console.log("ERROR", error);
       } finally {
-        this.$store.commit("SET_IS_LOADING(", false);
+        this.$store.commit("SET_IS_LOADING", false);
       }
     },
   },

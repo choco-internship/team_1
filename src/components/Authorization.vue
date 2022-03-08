@@ -110,7 +110,11 @@ export default {
       return this.formPosition === this.formGroup.length - 1;
     },
     onSubmitText() {
-      return this.isLastStep ? "Зарегистрироваться" : "Далее";
+      return this.isLastStep
+        ? this.authOption === "login"
+          ? "Войти"
+          : "Зарегистрироваться"
+        : "Далее";
     },
     defineTitle() {
       return this.authOption === "login" ? "Вход" : "Регистрация";

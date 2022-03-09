@@ -11,10 +11,16 @@
         :alt="product.product_name"
       />
       <div class="product__controll">
-        <button v-if="amount > 0" class="product__btn" @click="removeFromCart">
+        <button
+          v-if="currentAmount > 0"
+          class="product__btn"
+          @click="removeFromCart"
+        >
           &minus;
         </button>
-        <span v-if="amount > 0" class="product__amount">{{ amount }}</span>
+        <span v-if="currentAmount > 0" class="product__amount">{{
+          currentAmount
+        }}</span>
         <button class="product__btn" @click="addToCart">&plus;</button>
       </div>
     </div>
@@ -51,19 +57,27 @@ export default {
       },
     },
   },
+  computed: {
+    currentAmount() {
+      return this.product.amount || this.amount;
+    },
+    restaurant() {
+      return this.product.restaurant_id || this.restaurant_id;
+    },
+  },
   methods: {
     addToCart() {
       this.amount += 1;
       this.$store.dispatch("addProductToCart", {
         ...this.product,
-        restaurant_id: this.restaurant_id,
+        restaurant_id: this.restaurant,
       });
     },
     removeFromCart() {
       this.amount -= 1;
       this.$store.dispatch("removeProductFromCart", {
         ...this.product,
-        restaurant_id: this.restaurant_id,
+        restaurant_id: this.restaurant,
       });
     },
   },

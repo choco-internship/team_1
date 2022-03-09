@@ -40,7 +40,8 @@ export default {
   name: "Home",
   components: { Header },
   created() {
-    this.$store.dispatch("FETCH_RESTAURANTS");
+    this.$store.dispatch("fetchRestaurants");
+    this.$store.dispatch("emptyCart");
   },
   computed: {
     restaurants() {

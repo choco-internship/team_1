@@ -4,7 +4,7 @@
   </Header>
   <section class="menu-info">
     <!-- slider -->
-    <Slider />
+    <Slider :slides="restaurant.restaurant_images" />
     <!-- address -->
     <div class="menu-info__address container">
       {{ restaurant.location }}
@@ -47,10 +47,15 @@
       </router-link>
       <ul class="categories-list">
         <li
-          class="categories-list__item categories-list__item--active"
+          class="categories-list__item"
           v-for="(categorie, id) in restaurant.product_categories"
           :key="id"
           @click="goto(`categorie_${categorie.product_category_id}`)"
+          :class="
+            active == `categorie_${categorie.product_category_id}`
+              ? 'categories-list__item--active'
+              : null
+          "
         >
           {{ categorie.product_category_name }}
         </li>
@@ -63,6 +68,7 @@
       v-for="(menu, i) in restaurant.product_categories"
       :ref="`categorie_${menu.product_category_id}`"
       :key="i"
+      :class="{ active: active === `categorie_${menu.product_category_id}` }"
     >
       <div class="menu-category__title">{{ menu.product_category_name }}</div>
       <div class="menu-category__list">
@@ -93,6 +99,10 @@ import BaseButton from "../../components/BaseButton.vue";
 export default {
   name: "RestaurantPage",
   components: { Header, Slider, MenuItem, BaseButton },
+  props: ["selectedCategorie"],
+  data() {
+    return { active: null };
+  },
   computed: {
     getId() {
       return this.$route.params.id;
@@ -108,18 +118,23 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("FETCH_RESTAURANT", this.getId);
+    this.$store.dispatch("fetchRestaurant", this.getId);
   },
   methods: {
     goto(refName) {
       const element = this.$refs[refName];
-      const top = element[0].offsetTop;
-
-      window.scrollTo({
-        top: top,
-        behavior: "smooth",
-      });
+      if (element) {
+        const top = element[0].offsetTop;
+        this.active = refName;
+        window.scrollTo({
+          top: top,
+          behavior: "smooth",
+        });
+      }
     },
+  },
+  mounted() {
+    this.goto(`categorie_${this.selectedCategorie}`);
   },
 };
 </script>
@@ -134,6 +149,8 @@ export default {
 }
 
 .menu-info__nav {
+  top: 0;
+  position: sticky;
   margin-top: 20px;
   display: flex;
   align-items: center;

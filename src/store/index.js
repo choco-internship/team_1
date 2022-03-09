@@ -6,7 +6,7 @@ export default createStore({
     return {
       restaurants: [],
       restaurant: {},
-      orders: {},
+      orders: [],
       isAuthenticated: false,
       isModalOpen: false,
       isLoading: false,
@@ -49,10 +49,10 @@ export default createStore({
         console.log("ERROR", error);
       }
     },
-    async FETCH_ORDERS({ commit }, id) {
+    async FETCH_ORDERS({ commit }) {
       commit("SET_IS_LOADING", true);
       try {
-        const { data } = await api.orders.getOrder(id);
+        const { data } = await api.orders.getOrders();
         commit("SET_ORDERS", data);
         commit("SET_IS_LOADING", false);
       } catch (error) {

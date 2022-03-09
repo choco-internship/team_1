@@ -2,15 +2,15 @@
   <Header>Мои заказы</Header>
   <section class="order main-bg-color">
     <div v-if="isAuthenticated" class="order__list">
-      <router-link
+      <div
         v-for="order in orders"
-        :key="order.order_id"
-        :to="`/order-detail/${order.order_id}`"
+        :key="order.id"
+        @click="navigateToDetail(order.id)"
         class="order__link"
       >
         <div class="order-item container">
           <div class="order-item__header">
-            <h3 class="order-item__title">{{ name }}</h3>
+            <h3 class="order-item__title">{{ order.restaurant.name }}</h3>
             <p class="order-item__date">
               {{ convertToDate(order.created_at) }}
             </p>
@@ -19,7 +19,7 @@
           <p class="order-item__status">
             Статус -
             <span
-              :class="`order-item__status-text order-item__status-text${
+              :class="`order-item__status-text order-item__status-text ${
                 defineStatus(order.order_status).class
               }`"
             >
@@ -32,7 +32,7 @@
             alt=""
           />
         </div>
-      </router-link>
+      </div>
     </div>
     <div v-else class="order__hidden container">
       <div class="order__hidden-inner">
@@ -52,9 +52,14 @@
 import BaseButton from "@/components/BaseButton.vue";
 import Header from "@/components/Header.vue";
 
+import { convertToDate, defineStatus } from "@/helper";
+
 export default {
   name: "MyOrders",
-  components: { Header, BaseButton },
+  components: {
+    Header,
+    BaseButton,
+  },
   computed: {
     isAuthenticated() {
       return (
@@ -66,41 +71,16 @@ export default {
       return this.$store.getters.GET_ORDERS;
     },
   },
-  created() {
+  mounted() {
     if (this.isAuthenticated) {
-      this.fetchOrders();
+      this.$store.dispatch("fetchOrders");
     }
   },
   methods: {
-    fetchOrders() {
-      this.$store.dispatch("FETCH_ORDERS");
-    },
-    convertToDate(str) {
-      return str.replace("T", ", ").substring(0, 17);
-    },
-    defineStatus(number) {
-      switch (number) {
-        case 0:
-          return {
-            text: "в оброботке",
-            class: "--start",
-          };
-        case 1:
-          return {
-            text: "на кухне",
-            class: "--prepare",
-          };
-        case 2:
-          return {
-            text: "готов",
-            class: "",
-          };
-        case 3:
-          return {
-            text: "завершен",
-            class: "--ready",
-          };
-      }
+    convertToDate: convertToDate,
+    defineStatus: defineStatus,
+    navigateToDetail(id) {
+      this.$router.push(`/order-detail/${id}`);
     },
   },
 };
@@ -157,18 +137,6 @@ export default {
 
 .order-item__status {
   margin-top: 8px;
-}
-
-.order-item__status-text--start {
-  color: #2997ff;
-}
-
-.order-item__status-text--prepare {
-  color: #e4853d;
-}
-
-.order-item__status-text--ready {
-  color: #51a451;
 }
 
 .order-item__btn {

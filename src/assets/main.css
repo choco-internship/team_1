@@ -84,3 +84,15 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+.start {
+  color: #2997ff !important;
+}
+
+.prepare {
+  color: #e4853d !important;
+}
+
+.ready {
+  color: #51a451 !important;
+}

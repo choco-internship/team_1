@@ -97,11 +97,11 @@ const store = createStore({
     emptyCart({ commit }) {
       commit("EMPTY_CART");
     },
-    async FETCH_ORDERS({ commit }) {
+    async fetchOrders({ commit }) {
       commit("SET_IS_LOADING", true);
       try {
         const { data } = await api.orders.getOrders();
-        commit("SET_ORDERS", data);
+        commit("SET_ORDERS", data.order);
         commit("SET_IS_LOADING", false);
       } catch (error) {
         console.log("ERROR", error);

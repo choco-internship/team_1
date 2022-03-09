@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Correct to use wrapper for the entire project -->
+    <div class="wrapper">
+        <main class="main">
+            <section class="cart">
+                <div class="container cart__container">
+                    <div class="cart__wrapper">
+                        <div class="cart__restaurant restaurant">
+                            <div class="restaurant__content">
+                                <div class="restaurant__title">
+                                    Mamma mia
+                                </div>
+                                <div class="restaurant__street">
+                                    ул. Панфилова 109
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__order order">
+                            <div class="order__title">
+                                Мой заказ
+                            </div>
+                            <div class="order__list">
+                                <div class="order__item item-order">
+                                    <div class="item-order__content">
+                                        <div class="item-order__title">Пицца Маргарита</div>
+                                        <div class="item-order__price">1600тг</div>
+                                    </div>
+                                    <div class="item-order__image">
+                                        <img src="assets/img/menu/01.png" alt="Item 1">
+                                        <div class="item-order__button item-order__button_positioned">
+                                            <button class="add-btn">
+                                                <div class="add-btn__inner">
+                                                  <span class="add-btn__sign">&minus;</span>
+                                                  <span class="add-btn__number">1</span>
+                                                  <span class="add-btn__sign">&plus;</span>
+                                                </div>
+                                            </button>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="order__item item-order">
+                                    <div class="item-order__content">
+                                        <div class="item-order__title">Пицца Пепперони</div>
+                                        <div class="item-order__price">1600тг</div>
+                                    </div>
+                                    <div class="item-order__image">
+                                        <img src="assets/img/menu/02.png" alt="Item 2">
+                                        <div class="item-order__button item-order__button_positioned">
+                                            <button class="add-btn">
+                                                <div class="add-btn__inner">
+                                                  <span class="add-btn__sign">&minus;</span>
+                                                  <span class="add-btn__number">1</span>
+                                                  <span class="add-btn__sign">&plus;</span>
+                                                </div>
+                                            </button>
+                                      </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="order__total total-order">
+                                <div class="total-order__title">
+                                    Итого
+                                </div>
+                                <div class="total-order__price">
+                                    3200
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="cart__button">
+                <button class="btn btn_primary">
+                    <span class="btn__text">Оплатить</span>
+                    <span class="btn__text btn__text_absolute btn__text_price"
+                      >3 200 ₸</span
+                    >
+                  </button>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

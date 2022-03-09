@@ -1,6 +1,7 @@
 <template>
   <main class="main">
     <slot />
+    <Spinner v-show="isLoading" />
   </main>
   <footer class="footer">
     <Navbar />
@@ -9,14 +10,15 @@
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import Spinner from "../components/Spinner.vue";
+
 export default {
   name: "DefaultLayout",
-  components: { Navbar },
+  components: { Navbar, Spinner },
+  computed: {
+    isLoading() {
+      return this.$store.getters.GET_IS_LOADING;
+    },
+  },
 };
 </script>
-
-<style scoped>
-.main {
-  padding-bottom: 56px;
-}
-</style>

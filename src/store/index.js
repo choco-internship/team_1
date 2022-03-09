@@ -1,12 +1,14 @@
 import { createStore } from "vuex";
 import api from "../services/api";
 
-export default createStore({
+const initCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const store = createStore({
   state() {
     return {
       restaurants: [],
       restaurant: {},
-      cart: [],
+      cart: initCart,
     };
   },
   mutations: {
@@ -16,6 +18,13 @@ export default createStore({
     SET_RESTAURANT(state, payload) {
       state.restaurant = payload;
     },
+    // INITIALISE_CART(state) {
+    //   if (localStorage.getItem("cart")) {
+    //     this.replaceState(
+    //       Object.assign(state.cart, JSON.parse(localStorage.getItem("cart")))
+    //     );
+    //   }
+    // },
     ADD_TO_CART(state, product) {
       let cartItem = state.cart.find((p) => {
         return (
@@ -42,9 +51,12 @@ export default createStore({
       }
       state.cart = state.cart.filter((item) => item != cartItem);
     },
+    EMPTY_CART(state) {
+      state.cart = [];
+    },
   },
   actions: {
-    async FETCH_RESTAURANTS({ commit }) {
+    async fetchRestaurants({ commit }) {
       try {
         const restaurants = await api.restaurants.getRestaurants();
         commit("SET_RESTAURANTS", restaurants);
@@ -52,7 +64,7 @@ export default createStore({
         console.log("ERROR", error);
       }
     },
-    async FETCH_RESTAURANT({ commit }, id) {
+    async fetchRestaurant({ commit }, id) {
       try {
         const { data } = await api.restaurants.getRestaurant(id);
         commit("SET_RESTAURANT", data);
@@ -66,6 +78,9 @@ export default createStore({
     removeProductFromCart({ commit }, product) {
       commit("REMOVE_FROM_CART", product);
     },
+    emptyCart({ commit }) {
+      commit("EMPTY_CART");
+    },
   },
   getters: {
     GET_RESTAURANTS: (state) => state.restaurants,
@@ -73,7 +88,7 @@ export default createStore({
     GET_CART: (state) => state.cart,
     GET_TOTAL_PRICE: (state) =>
       state.cart.reduce(function (prev, cur) {
-        return prev + cur.price;
+        return prev + cur.price * cur.amount;
       }, 0),
     GET_TOTAL_AMOUNT: (state) =>
       state.cart.reduce(function (prev, cur) {
@@ -81,3 +96,9 @@ export default createStore({
       }, 0),
   },
 });
+
+store.subscribe((mutation, state) => {
+  localStorage.setItem("cart", JSON.stringify(state.cart));
+});
+
+export default store;

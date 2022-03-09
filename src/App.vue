@@ -10,12 +10,12 @@ import HiddenLayout from "./layouts/HiddenLayout.vue";
 
 export default {
   name: "App",
+  components: { DefaultLayout, HiddenLayout },
   computed: {
     layout() {
       return this.$route.meta.layout || "DefaultLayout";
     },
   },
-  components: { DefaultLayout, HiddenLayout },
 };
 </script>
 

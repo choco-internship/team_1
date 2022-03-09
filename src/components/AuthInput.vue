@@ -6,7 +6,8 @@
       :id="id"
       :type="type"
       :placeholder="placeholder"
-      @input="$emit('update:value', $event.target.value)"
+      :value="value"
+      @input="$emit('onTyping', $event.target.value)"
     />
     <p v-if="isError" class="error">{{ error }}</p>
   </div>
@@ -14,6 +15,7 @@
 
 <script>
 export default {
+  name: "AuthInput",
   props: {
     id: {
       type: String,

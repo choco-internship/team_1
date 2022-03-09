@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import api from "../services/api";
+import api from "@/services/api";
 
 const initCart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -9,6 +9,10 @@ const store = createStore({
       restaurants: [],
       restaurant: {},
       cart: initCart,
+      orders: [],
+      isAuthenticated: false,
+      isModalOpen: false,
+      isLoading: false,
     };
   },
   mutations: {
@@ -54,6 +58,18 @@ const store = createStore({
     EMPTY_CART(state) {
       state.cart = [];
     },
+    SET_ORDERS(state, payload) {
+      state.orders = payload;
+    },
+    SET_IS_AUTHENTICATED(state, payload) {
+      state.isAuthenticated = payload;
+    },
+    SET_IS_MODAL_OPEN(state, payload) {
+      state.isModalOpen = payload;
+    },
+    SET_IS_LOADING(state, payload) {
+      state.isLoading = payload;
+    },
   },
   actions: {
     async fetchRestaurants({ commit }) {
@@ -81,6 +97,18 @@ const store = createStore({
     emptyCart({ commit }) {
       commit("EMPTY_CART");
     },
+    async FETCH_ORDERS({ commit }) {
+      commit("SET_IS_LOADING", true);
+      try {
+        const { data } = await api.orders.getOrders();
+        commit("SET_ORDERS", data);
+        commit("SET_IS_LOADING", false);
+      } catch (error) {
+        console.log("ERROR", error);
+      } finally {
+        commit("SET_IS_LOADING", false);
+      }
+    },
   },
   getters: {
     GET_RESTAURANTS: (state) => state.restaurants,
@@ -94,6 +122,10 @@ const store = createStore({
       state.cart.reduce(function (prev, cur) {
         return prev + cur.amount;
       }, 0),
+    GET_ORDERS: (state) => state.orders,
+    GET_IS_AUTHENTICATED: (state) => state.isAuthenticated,
+    GET_IS_MODAL_OPEN: (state) => state.isModalOpen,
+    GET_IS_LOADING: (state) => state.isLoading,
   },
 });
 

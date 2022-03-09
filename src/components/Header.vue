@@ -4,7 +4,7 @@
       <button
         v-show="isBackIcon"
         class="top-bar__back-btn"
-        @click="$router.go(-1)"
+        @click="isAuthHeader ? returnBack() : $router.go(-1)"
       >
         <svg
           width="24"
@@ -32,6 +32,15 @@ export default {
   props: {
     isBackIcon: Boolean,
     isFlat: Boolean,
+    isAuthHeader: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    returnBack() {
+      this.$emit("returnBack");
+    },
   },
 };
 </script>

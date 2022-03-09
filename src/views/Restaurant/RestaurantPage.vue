@@ -4,7 +4,7 @@
   </Header>
   <section class="menu-info">
     <!-- slider -->
-    <Slider />
+    <Slider :slides="restaurant.restaurant_images" />
     <!-- address -->
     <div class="menu-info__address container">
       {{ restaurant.location }}
@@ -47,9 +47,15 @@
       </router-link>
       <ul class="categories-list">
         <li
-          class="categories-list__item categories-list__item--active"
+          class="categories-list__item"
           v-for="(categorie, id) in restaurant.product_categories"
           :key="id"
+          @click="goto(`categorie_${categorie.product_category_id}`)"
+          :class="
+            active == `categorie_${categorie.product_category_id}`
+              ? 'categories-list__item--active'
+              : null
+          "
         >
           {{ categorie.product_category_name }}
         </li>
@@ -60,24 +66,26 @@
     <div
       class="menu-category"
       v-for="(menu, i) in restaurant.product_categories"
+      :ref="`categorie_${menu.product_category_id}`"
       :key="i"
+      :class="{ active: active === `categorie_${menu.product_category_id}` }"
     >
       <div class="menu-category__title">{{ menu.product_category_name }}</div>
       <div class="menu-category__list">
         <MenuItem
           v-for="(product, i) in menu.products"
-          :product_id="product.product_id"
-          :name="product.product_name"
-          :description="product.description"
-          :price="product.price"
-          :img_path="product.image"
+          :product="product"
+          :restaurant_id="getId"
           :key="i"
         />
       </div>
     </div>
   </section>
-  <router-link v-if="order.length" class="fixed-button container" to="/cart">
-    <BaseButton :amount="1" :price="1600" :contentDisabled="true"
+  <router-link v-if="cartTotalAmount" class="fixed-button container" to="/cart">
+    <BaseButton
+      :amount="cartTotalAmount"
+      :price="cartTotalPrice"
+      :contentDisabled="true"
       >Корзина</BaseButton
     >
   </router-link>
@@ -91,10 +99,9 @@ import BaseButton from "../../components/BaseButton.vue";
 export default {
   name: "RestaurantPage",
   components: { Header, Slider, MenuItem, BaseButton },
+  props: ["selectedCategorie"],
   data() {
-    return {
-      order: [],
-    };
+    return { active: null };
   },
   computed: {
     getId() {
@@ -103,9 +110,31 @@ export default {
     restaurant() {
       return this.$store.state.restaurant;
     },
+    cartTotalPrice() {
+      return this.$store.getters.GET_TOTAL_PRICE;
+    },
+    cartTotalAmount() {
+      return this.$store.getters.GET_TOTAL_AMOUNT;
+    },
   },
   created() {
-    this.$store.dispatch("FETCH_RESTAURANT", this.getId);
+    this.$store.dispatch("fetchRestaurant", this.getId);
+  },
+  methods: {
+    goto(refName) {
+      const element = this.$refs[refName];
+      if (element) {
+        const top = element[0].offsetTop;
+        this.active = refName;
+        window.scrollTo({
+          top: top,
+          behavior: "smooth",
+        });
+      }
+    },
+  },
+  mounted() {
+    this.goto(`categorie_${this.selectedCategorie}`);
   },
 };
 </script>
@@ -120,6 +149,8 @@ export default {
 }
 
 .menu-info__nav {
+  top: 0;
+  position: sticky;
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -139,7 +170,6 @@ export default {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-
 .categories-list__item {
   list-style: none;
   padding: 10px 24px;

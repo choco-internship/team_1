@@ -1,17 +1,27 @@
 <template>
   <div class="product">
     <div class="product__decription">
-      <div class="product__title">{{ name }}</div>
-      <div class="product__price">{{ price }}</div>
+      <div class="product__title">{{ product.product_name }}</div>
+      <div class="product__price">{{ product.price }}</div>
     </div>
-    <div v-if="img_path" class="product__image">
-      <img :src="img_path" :alt="name" />
+    <div v-if="product.image" class="product__image">
+      <img
+        class="product__image-tag"
+        :src="product.image"
+        :alt="product.product_name"
+      />
       <div class="product__controll">
-        <button v-if="amount > 0" class="product__btn" @click="amount -= 1">
+        <button
+          v-if="currentAmount > 0"
+          class="product__btn"
+          @click="removeFromCart"
+        >
           &minus;
         </button>
-        <span v-if="amount > 0" class="product__amount">{{ amount }}</span>
-        <button class="product__btn" @click="amount += 1">&plus;</button>
+        <span v-if="currentAmount > 0" class="product__amount">{{
+          currentAmount
+        }}</span>
+        <button class="product__btn" @click="addToCart">&plus;</button>
       </div>
     </div>
   </div>
@@ -22,21 +32,53 @@ export default {
   name: "RestaurantMenu",
   data() {
     return {
-      amount: -1,
+      amount: 0,
     };
   },
   props: {
-    name: {
+    restaurant_id: {
       type: String,
     },
-    description: {
-      type: String,
+    product: {
+      product_id: {
+        type: Number,
+      },
+      product_name: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      price: {
+        type: Number,
+      },
+      image: {
+        type: String,
+      },
     },
-    price: {
-      type: Number,
+  },
+  computed: {
+    currentAmount() {
+      return this.product.amount || this.amount;
     },
-    img_path: {
-      type: String,
+    restaurant() {
+      return this.product.restaurant_id || this.restaurant_id;
+    },
+  },
+  methods: {
+    addToCart() {
+      this.amount += 1;
+      this.$store.dispatch("addProductToCart", {
+        ...this.product,
+        restaurant_id: this.restaurant,
+      });
+    },
+    removeFromCart() {
+      this.amount -= 1;
+      this.$store.dispatch("removeProductFromCart", {
+        ...this.product,
+        restaurant_id: this.restaurant,
+      });
     },
   },
 };
@@ -66,13 +108,10 @@ export default {
 .product__image {
   position: relative;
 }
-
-.product__image img {
-  width: 128px;
+.product__image-tag {
+  max-width: 120px;
   height: 90px;
-  object-fit: cover;
 }
-
 .product__controll {
   display: flex;
   justify-content: space-evenly;

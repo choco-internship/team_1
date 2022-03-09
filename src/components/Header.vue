@@ -52,10 +52,10 @@ export default {
   left: 0;
   width: 100%;
   max-width: 100vw;
-  z-index: 1;
-  height: 56px;
+  z-index: 9;
 }
 .top-bar {
+  height: 56px;
   display: flex;
   padding: 20px 16px;
   background-color: #fff;

@@ -60,7 +60,8 @@ button {
 }
 
 .fixed-button {
-  position: fixed;
+  display: block;
+  position: sticky;
   bottom: 0;
   width: 100%;
   max-width: 100vw;

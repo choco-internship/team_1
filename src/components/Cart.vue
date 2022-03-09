@@ -3,27 +3,23 @@
   <section class="cart">
     <div class="cart__group">
       <div class="restaurant-info">
-        <h3 class="restaurant-info__title">Mamma mia</h3>
-        <p class="restaurant-info__address">ул. Панфилова 109</p>
+        <h3 class="restaurant-info__title">{{ restaurant.restaurant_name }}</h3>
+        <p class="restaurant-info__address">
+          {{ restaurant.location }}
+        </p>
       </div>
     </div>
     <div class="cart__group">
       <h3 class="cart__title">Мои заказы</h3>
-      <MenuItem
-        v-for="(order, i) in orders"
-        :key="i"
-        :name="order.name"
-        :price="order.price"
-        :img_path="order.img_path"
-      />
+      <MenuItem v-for="(product, i) in cart" :key="i" :product="product" />
       <div class="cart__summary">
         <span>Итого</span>
-        <span>{{ getSumary }}</span>
+        <span>{{ cartTotalPrice }}</span>
       </div>
     </div>
   </section>
-  <footer class="fixed-button container">
-    <BaseButton :price="getSumary">Оплатить</BaseButton>
+  <footer v-if="cartTotalPrice" class="fixed-button container">
+    <BaseButton :price="cartTotalPrice" @click="makeOrder">Оплатить</BaseButton>
   </footer>
 </template>
 
@@ -31,27 +27,47 @@
 import Header from "./Header.vue";
 import MenuItem from "../views/Restaurant/MenuItem.vue";
 import BaseButton from "./BaseButton.vue";
+import api from "../services/api";
 export default {
   components: { Header, MenuItem, BaseButton },
-  data() {
-    return {
-      orders: [
-        {
-          name: "Пицца Маргарита",
-          price: 1600,
-          img_path: "pizza0",
-        },
-        {
-          name: "Пицца Пепперони",
-          price: 1600,
-          img_path: "pizza1",
-        },
-      ],
-    };
-  },
   computed: {
-    getSumary() {
-      return this.orders.reduce((a, b) => +a + +b.price, 0);
+    cart() {
+      return this.$store.state.cart;
+    },
+    cartTotalPrice() {
+      return this.$store.getters.GET_TOTAL_PRICE;
+    },
+    restaurant() {
+      return this.$store.state.restaurant;
+    },
+  },
+  mounted() {
+    if (!this.cartTotalPrice) {
+      this.$router.push("/");
+    }
+  },
+  methods: {
+    async makeOrder() {
+      if (this.cart) {
+        let order = {
+          restaurant_id: this.restaurant.restaurant_id,
+          products: [],
+        };
+
+        this.cart.forEach((product) => {
+          order.products.push({
+            id: product.product_id,
+            quantity: product.amount,
+          });
+        });
+        try {
+          api.restaurants.makeOrder(order);
+        } catch {
+          (error) => console.log(error);
+        } finally {
+          this.$store.dispatch("emptyCart");
+        }
+      }
     },
   },
 };
@@ -59,7 +75,7 @@ export default {
 
 <style scoped>
 .cart {
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f8f8f8;
 }
 .cart__title {

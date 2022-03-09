@@ -40,7 +40,8 @@ export default {
   name: "Home",
   components: { Header },
   created() {
-    this.$store.dispatch("FETCH_RESTAURANTS");
+    this.$store.dispatch("fetchRestaurants");
+    this.$store.dispatch("emptyCart");
   },
   computed: {
     restaurants() {
@@ -61,6 +62,8 @@ export default {
   object-fit: cover;
   border-radius: 8px;
   margin-right: 16px;
+  max-width: 90px;
+  max-height: 90px;
 }
 
 .restaurant__link {

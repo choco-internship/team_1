@@ -44,8 +44,12 @@ const routes = [
     },
   },
   {
+    name: "restaurant",
     path: "/restaurant/:id",
     component: () => import("@/views/Restaurant/RestaurantPage.vue"),
+    props: {
+      selectedCategorie: 0,
+    },
     meta: {
       requiresAuth: true,
       layout: "HiddenLayout",

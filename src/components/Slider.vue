@@ -1,19 +1,30 @@
 <template>
-  <div class="slider">
-    <div class="slider__item">
-      <img
-        class="slider__image"
-        src="@/assets/images/mammamia.png"
-        alt="restaurant_image"
-      />
-    </div>
-    <span class="slider__count">1/24</span>
-  </div>
+  <swiper :slides-per-view="1" :space-between="50">
+    <swiper-slide v-for="(silde, i) in slides" :key="i">
+      <div class="slider__item">
+        <img class="slider__image" :src="silde.url" alt="restaurant_image" />
+      </div>
+      <span class="slider__count">{{ `${i + 1}/${slides.length}` }}</span>
+    </swiper-slide>
+  </swiper>
+  <div class="slider"></div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/swiper-bundle.min.css";
+
 export default {
   name: "Slider",
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  props: {
+    slides: {
+      type: Array,
+    },
+  },
 };
 </script>
 
@@ -29,6 +40,7 @@ export default {
 }
 
 .slider__item {
+  max-height: 173px;
   position: relative;
 }
 

@@ -2,17 +2,19 @@
   <Header :isBackIcon="true">Детали заказа</Header>
   <section class="detail main-bg-color">
     <div class="detail__card container">
-      <h3 class="detail__title">{{ orders.restaurant.name }}</h3>
-      <p class="detail__address">{{ orders.restaurant.location }}</p>
+      <h3 class="detail__title">{{ order.restaurant.name }}</h3>
+      <p class="detail__address">{{ order.restaurant.location }}</p>
       <div class="detail__divider"></div>
       <div class="detail-block">
         <p class="detail-block__title">Статус заказа</p>
-        <p class="detail-block__text">Завершен</p>
+        <p class="detail-block__text">
+          {{ defineStatus(order.order_status).text }}
+        </p>
       </div>
       <div class="detail-block">
         <p class="detail-block__title">Дата</p>
         <p class="detail-block__text">
-          {{ convertToDate(orders.restaurant.created_at) }}
+          {{ convertToDate(order.created_at) }}
         </p>
       </div>
       <div class="detail-block">
@@ -24,21 +26,19 @@
       <div class="detail-block">
         <p class="detail-block__title">Позиции в заказе</p>
         <div
-          v-for="order_detail in orders.order_detail"
+          v-for="order_detail in order.order_details"
           :key="order_detail.id"
           class="detail-block__inner"
         >
-          <span class="detail-block__text"
-            >{{ order_detail.quantity }} х {{ order_detail.product.name }}</span
-          >
-          <span class="detail-block__text"
-            >{{ order_detail.product.price }} тг</span
-          >
+          <span class="detail-block__text">
+            {{ order_detail.quantity }} х {{ product[0].product_name }}
+          </span>
+          <span class="detail-block__text"> {{ product[0].price }} тг </span>
         </div>
         <div class="detail__divider"></div>
         <div class="detail__summary">
           <span>Итого</span>
-          <span>{{ orders.total }} тг</span>
+          <span>{{ order.total }} тг</span>
         </div>
       </div>
     </div>
@@ -47,18 +47,50 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import api from "@/services/api";
+import { convertToDate, defineStatus } from "@/helper";
 
 export default {
   name: "MyOrdersDetail",
   components: { Header },
+  data() {
+    return {
+      product: null,
+    };
+  },
   computed: {
-    orders() {
-      return this.$store.getters.GET_ORDERS;
+    order() {
+      return this.$store.getters.GET_ORDERS.filter((item) => {
+        return item.id === this.routeId;
+      })[0];
+    },
+    routeId() {
+      return +this.$route.params.id;
     },
   },
+  created() {
+    this.fetchProduct();
+  },
   methods: {
-    convertToDate(str) {
-      return str.replace("T", ", ").substring(0, 17);
+    convertToDate: convertToDate,
+    defineStatus: defineStatus,
+    async fetchProduct() {
+      try {
+        const { data } = await api.restaurants.getRestaurant(
+          this.order.restaurant_id
+        );
+
+        const allProducts = [];
+        data.product_categories.forEach((item) =>
+          allProducts.push(...item.products)
+        );
+
+        this.product = allProducts.filter(
+          (item) => item.product_id === this.order.order_details[0].product_id
+        );
+      } catch (error) {
+        console.log("ERROR", error);
+      }
     },
   },
 };

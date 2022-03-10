@@ -10,7 +10,6 @@ const store = createStore({
       restaurant: {},
       cart: initCart,
       orders: [],
-      isAuthenticated: false,
       isModalOpen: false,
       isLoading: false,
     };
@@ -22,13 +21,6 @@ const store = createStore({
     SET_RESTAURANT(state, payload) {
       state.restaurant = payload;
     },
-    // INITIALISE_CART(state) {
-    //   if (localStorage.getItem("cart")) {
-    //     this.replaceState(
-    //       Object.assign(state.cart, JSON.parse(localStorage.getItem("cart")))
-    //     );
-    //   }
-    // },
     ADD_TO_CART(state, product) {
       let cartItem = state.cart.find((p) => {
         return (
@@ -61,9 +53,6 @@ const store = createStore({
     SET_ORDERS(state, payload) {
       state.orders = payload;
     },
-    SET_IS_AUTHENTICATED(state, payload) {
-      state.isAuthenticated = payload;
-    },
     SET_IS_MODAL_OPEN(state, payload) {
       state.isModalOpen = payload;
     },
@@ -73,19 +62,27 @@ const store = createStore({
   },
   actions: {
     async fetchRestaurants({ commit }) {
+      commit("SET_IS_LOADING", true);
       try {
         const restaurants = await api.restaurants.getRestaurants();
         commit("SET_RESTAURANTS", restaurants);
+        commit("SET_IS_LOADING", false);
       } catch (error) {
         console.log("ERROR", error);
+      } finally {
+        commit("SET_IS_LOADING", false);
       }
     },
     async fetchRestaurant({ commit }, id) {
+      commit("SET_IS_LOADING", true);
       try {
         const { data } = await api.restaurants.getRestaurant(id);
         commit("SET_RESTAURANT", data);
+        commit("SET_IS_LOADING", false);
       } catch (error) {
         console.log("ERROR", error);
+      } finally {
+        commit("SET_IS_LOADING", false);
       }
     },
     addProductToCart({ commit }, product) {
@@ -123,7 +120,6 @@ const store = createStore({
         return prev + cur.amount;
       }, 0),
     GET_ORDERS: (state) => state.orders,
-    GET_IS_AUTHENTICATED: (state) => state.isAuthenticated,
     GET_IS_MODAL_OPEN: (state) => state.isModalOpen,
     GET_IS_LOADING: (state) => state.isLoading,
   },

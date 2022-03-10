@@ -9,6 +9,10 @@ const api = axios.create({
 
 api.interceptors.request.use(
   function (config) {
+    if (localStorage.getItem("token_expire") < Date.now() / 1000) {
+      localStorage.clear();
+    }
+
     const access_token = localStorage.getItem("access_token");
 
     if (access_token) {

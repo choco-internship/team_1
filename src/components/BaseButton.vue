@@ -54,6 +54,8 @@ export default {
   font-weight: bold;
   color: #ffffff;
   line-height: 19px;
+  margin: 0 auto;
+  display: block;
 }
 
 .btn--primary {

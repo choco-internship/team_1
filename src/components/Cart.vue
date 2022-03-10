@@ -41,11 +41,6 @@ export default {
       return this.$store.state.restaurant;
     },
   },
-  mounted() {
-    if (!this.cartTotalPrice) {
-      this.$router.push("/");
-    }
-  },
   methods: {
     async makeOrder() {
       if (this.cart) {
@@ -66,6 +61,7 @@ export default {
           (error) => console.log(error);
         } finally {
           this.$store.dispatch("emptyCart");
+          this.$router.push("/myorders");
         }
       }
     },

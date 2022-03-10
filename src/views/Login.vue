@@ -18,11 +18,12 @@ export default {
       try {
         const { data } = await api.auth.loginUser(body);
         const token = data.access_token;
+        const token_expire = Date.now() / 1000 + data.expires_in;
 
         if (token) {
-          this.$store.commit("SET_IS_AUTHENTICATED", true);
-          this.$router.push("/");
           localStorage.setItem("access_token", token);
+          localStorage.setItem("token_expire", token_expire);
+          this.$router.push("/");
           this.$store.commit("SET_IS_LOADING", false);
         }
       } catch (error) {

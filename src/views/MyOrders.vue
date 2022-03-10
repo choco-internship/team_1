@@ -62,10 +62,7 @@ export default {
   },
   computed: {
     isAuthenticated() {
-      return (
-        localStorage.getItem("access_token") &&
-        this.$store.getters.GET_IS_AUTHENTICATED
-      );
+      return localStorage.getItem("access_token");
     },
     orders() {
       return this.$store.getters.GET_ORDERS;

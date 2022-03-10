@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from "@/store";
 
 const routes = [
   {
@@ -90,7 +89,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  if (requiresAuth && !store.getters.GET_IS_AUTHENTICATED) {
+  if (requiresAuth && !localStorage.getItem("access_token")) {
     next("/login");
   } else {
     next();

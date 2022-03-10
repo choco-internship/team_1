@@ -83,7 +83,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("/team_1/"),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
